@@ -63,4 +63,6 @@ public class ManageController {
         manageService.saveSpuInfo(spuInfo);
 
     }
+
+
 }

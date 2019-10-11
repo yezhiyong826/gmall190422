@@ -41,6 +41,18 @@ public class ManageServiceImpl implements ManageService{
     @Autowired
     private SpuImageMapper spuImageMapper;
 
+    @Autowired
+    private SkuImageMapper skuImageMapper;
+
+    @Autowired
+    private SkuInfoMapper skuInfoMapper;
+
+    @Autowired
+    private SkuAttrValueMapper skuAttrValueMapper;
+
+    @Autowired
+    private SkuSaleAttrValueMapper skuSaleAttrValueMapper;
+
     @Override
     public List<BaseCatalog1> getCatalog1() {
 
@@ -63,10 +75,11 @@ public class ManageServiceImpl implements ManageService{
 
     @Override
     public List<BaseAttrInfo> getAttrInfoList(String catalog3Id) {
-        BaseAttrInfo baseAttrInfo = new BaseAttrInfo();
-        baseAttrInfo.setCatalog3Id(catalog3Id);
-        List<BaseAttrInfo> attrInfoList = attrInfoMapper.select(baseAttrInfo);
-        return attrInfoList;
+//        BaseAttrInfo baseAttrInfo = new BaseAttrInfo();
+//        baseAttrInfo.setCatalog3Id(catalog3Id);
+//        List<BaseAttrInfo> attrInfoList = attrInfoMapper.select(baseAttrInfo);
+
+        return attrInfoMapper.selectBaseAttrInfoListByCatalog3Id(catalog3Id);
     }
 
     @Override
@@ -150,5 +163,45 @@ public class ManageServiceImpl implements ManageService{
         List<SpuImage> spuImageList = spuImageMapper.select(spuImage);
         return spuImageList;
     }
+
+    @Override
+    public List<SpuSaleAttr> getSpuSaleAttrList(String spuId) {
+        return spuSaleAttrMapper.selectSpuSaleAttrList(spuId);
+    }
+
+    @Override
+    @Transactional
+    public void saveSkuInfo(SkuInfo skuInfo) {
+        skuInfoMapper.insertSelective(skuInfo);
+
+        //skuSaleAttrValue
+        List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
+        if (skuSaleAttrValueList!=null && skuSaleAttrValueList.size()>0){
+            for (SkuSaleAttrValue skuSaleAttrValue : skuSaleAttrValueList) {
+                skuSaleAttrValue.setSkuId(skuInfo.getId());
+                skuSaleAttrValueMapper.insertSelective(skuSaleAttrValue);
+            }
+        }
+
+        //skuImage
+        List<SkuImage> skuImageList = skuInfo.getSkuImageList();
+        if (skuImageList!=null && skuImageList.size()>0){
+            for (SkuImage skuImage : skuImageList) {
+                skuImage.setSkuId(skuInfo.getId());
+                skuImageMapper.insertSelective(skuImage);
+            }
+        }
+
+        //skuAttrValue
+        List<SkuAttrValue> skuAttrValueList = skuInfo.getSkuAttrValueList();
+        if (skuAttrValueList!=null && skuAttrValueList.size()>0){
+            for (SkuAttrValue skuAttrValue : skuAttrValueList) {
+                skuAttrValue.setAttrId(skuInfo.getId());
+                skuAttrValueMapper.insertSelective(skuAttrValue);
+            }
+        }
+
+    }
+
 
 }
