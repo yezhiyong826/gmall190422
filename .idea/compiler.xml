@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="fastdfs-client-java" />
         <module name="gmall-bean" />
         <module name="gmall-common-util" />
         <module name="gmall-interface" />
@@ -22,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cdssc" target="1.8" />
+      <module name="fastdfs-client-java" target="1.6" />
       <module name="gmall-bean" target="1.8" />
       <module name="gmall-common-util" target="1.8" />
       <module name="gmall-interface" target="1.8" />
@@ -34,6 +36,14 @@
       <module name="gmall-web-util" target="1.8" />
       <module name="gmallcommonutil" target="1.8" />
       <module name="gmallinterface" target="1.8" />
+      <module name="guliedu_0422" target="1.8" />
+      <module name="guliedu_common" target="1.8" />
+      <module name="guliedu_educenter" target="1.8" />
+      <module name="guliedu_eduek" target="1.8" />
+      <module name="guliedu_eduoss" target="1.8" />
+      <module name="guliedu_eduservice" target="1.8" />
+      <module name="guliedu_edusta" target="1.8" />
+      <module name="guliedu_eduvod" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

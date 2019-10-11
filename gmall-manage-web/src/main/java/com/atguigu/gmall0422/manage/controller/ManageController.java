@@ -57,4 +57,10 @@ public class ManageController {
     public List<SpuInfo> spuList(SpuInfo spuInfo){
         return manageService.getSpuInfoList(spuInfo);
     }
+
+    @RequestMapping("saveSpuInfo")
+    public void saveSpuInfo(@RequestBody SpuInfo spuInfo){
+        manageService.saveSpuInfo(spuInfo);
+
+    }
 }
