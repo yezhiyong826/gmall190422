@@ -5,6 +5,7 @@ import com.atguigu.gmall0422.bean.*;
 import java.util.List;
 
 public interface ManageService {
+
     List<BaseCatalog1> getCatalog1();
 
     List<BaseCatalog2> getCatalog2(String catalog1Id);
@@ -27,9 +28,15 @@ public interface ManageService {
 
     List<SpuImage> getSpuImageList(String spuId);
 
-
     List<SpuSaleAttr> getSpuSaleAttrList(String spuId);
 
     void saveSkuInfo(SkuInfo skuInfo);
 
+    SkuInfo getSkuInfo(String skuId);
+
+    List<SkuImage> getSkuImageList(String skuId);
+
+    List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(SkuInfo skuInfo);
+
+    List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId);
 }
