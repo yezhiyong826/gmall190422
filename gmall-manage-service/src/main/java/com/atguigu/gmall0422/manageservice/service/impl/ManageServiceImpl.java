@@ -271,7 +271,13 @@ public class ManageServiceImpl implements ManageService{
     }
 
     private SkuInfo getSkuInfoDB(String skuId){
-        return skuInfoMapper.selectByPrimaryKey(skuId);
+        SkuInfo skuInfo = skuInfoMapper.selectByPrimaryKey(skuId);
+        skuInfo.setSkuImageList(getSkuImageList(skuId));
+        SkuAttrValue skuAttrValue = new SkuAttrValue();
+        skuAttrValue.setSkuId(skuId);
+        List<SkuAttrValue> skuAttrValueList = skuAttrValueMapper.select(skuAttrValue);
+        skuInfo.setSkuAttrValueList(skuAttrValueList);
+        return skuInfo;
     }
 
     @Override
